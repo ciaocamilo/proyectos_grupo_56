@@ -16,4 +16,11 @@ public class ClientePremium extends Persona implements Tiquete {
         return precioFinal;
     }
 
+    @Override
+    public void mostrarDatos() {
+        System.out.println("Cedula = " + this.cedula
+                            + " Nombre = " + this.nombre
+                            + " Número tarjeta = " + this.numeroTarjeta);
+    }
+
 }
