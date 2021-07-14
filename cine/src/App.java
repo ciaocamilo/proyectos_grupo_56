@@ -13,6 +13,7 @@ public class App {
         String cedula = scan.nextLine();
         System.out.println("Ingrese su nombre:");
         String nombre = scan.nextLine();
+        // scan.close();
 
         clienteUno.setCedula(cedula);
         clienteUno.setNombre(nombre);
@@ -43,5 +44,31 @@ public class App {
                             + "\nNúmero tarjeta: " + clienteDos.getNumeroTarjeta()
                             + "\nPrecio entrada: " + precioDos);
         clienteDos.mostrarDatos();
+
+        // Pruebas contenedores
+        Prueba pruebaContenedor = new Prueba();
+        // pruebaContenedor.generarLista();
+
+
+        // Listas de objetos
+        int opcion = 1;
+        while (opcion == 1) {
+            System.out.println("Ingrese su cédula:");
+            cedula = scan.nextLine();
+            System.out.println("Ingrese su nombre:");
+            nombre = scan.nextLine();
+            System.out.println("Ingrese su ID:");
+            int id = scan.nextInt();
+            Cliente nuevoCliente = new Cliente();
+            nuevoCliente.setCedula(cedula);
+            nuevoCliente.setNombre(nombre);
+            nuevoCliente.setId(id);
+            pruebaContenedor.agregarCliente(nuevoCliente);
+            System.out.println("Desea agregar otro cliente? (1 / 0):");
+            opcion = scan.nextInt();
+        }
+        pruebaContenedor.mostrarNombreClientes();
+
     }
+
 }
