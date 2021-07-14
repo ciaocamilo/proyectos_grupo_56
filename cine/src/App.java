@@ -45,16 +45,20 @@ public class App {
                             + "\nPrecio entrada: " + precioDos);
         clienteDos.mostrarDatos();
 
+        System.out.println();
+        System.out.println("- - Lista de clientes - -");
+
         // Pruebas contenedores
         Prueba pruebaContenedor = new Prueba();
         // pruebaContenedor.generarLista();
 
 
         // Listas de objetos
-        int opcion = 1;
-        while (opcion == 1) {
+        String opcion = "S";
+        while (opcion.equalsIgnoreCase("S")) { // Ignora mayúsculas
             System.out.println("Ingrese su cédula:");
-            cedula = scan.nextLine();
+            cedula = scan.next(); // Uso de next
+            scan.nextLine();
             System.out.println("Ingrese su nombre:");
             nombre = scan.nextLine();
             System.out.println("Ingrese su ID:");
@@ -64,8 +68,9 @@ public class App {
             nuevoCliente.setNombre(nombre);
             nuevoCliente.setId(id);
             pruebaContenedor.agregarCliente(nuevoCliente);
-            System.out.println("Desea agregar otro cliente? (1 / 0):");
-            opcion = scan.nextInt();
+            System.out.println("Desea agregar otro cliente? (s / n):");
+            opcion = scan.next();
+            scan.nextLine();
         }
         pruebaContenedor.mostrarNombreClientes();
 
