@@ -72,8 +72,8 @@ public class App {
             opcion = scan.next();
             scan.nextLine();
         }
-        pruebaContenedor.mostrarNombreClientes();
-
+        //pruebaContenedor.mostrarNombreClientes();
+        pruebaContenedor.mostrarDatosClientes();
     }
 
 }

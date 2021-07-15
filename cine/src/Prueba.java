@@ -44,4 +44,17 @@ public class Prueba {
         }
     }
 
+    public void mostrarDatosClientes() {
+        String cadenaClientes = "";
+        System.out.println("\nDatos de los clientes");
+        for (int i = 0; i < listaClientes.size(); i++) {
+            String datos = "\nCedula: " + listaClientes.get(i).getCedula()
+                            + "\nNombre: " + listaClientes.get(i).getNombre()
+                            + "\nID: " + listaClientes.get(i).getId()
+                            + "\n-----------";
+            cadenaClientes = cadenaClientes.concat(datos);
+        }
+        System.out.println(cadenaClientes);
+    }
+
 }
