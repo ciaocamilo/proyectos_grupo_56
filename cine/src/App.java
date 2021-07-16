@@ -6,6 +6,7 @@ public class App {
 
         // Cliente Uno
 
+
         Cliente clienteUno = new Cliente();
 
         Scanner scan = new Scanner(System.in);
@@ -50,10 +51,11 @@ public class App {
 
         // Pruebas contenedores
         Prueba pruebaContenedor = new Prueba();
-        // pruebaContenedor.generarLista();
+        pruebaContenedor.generarLista();
 
 
         // Listas de objetos
+
         String opcion = "S";
         while (opcion.equalsIgnoreCase("S")) { // Ignora mayúsculas
             System.out.println("Ingrese su cédula:");
@@ -74,6 +76,7 @@ public class App {
         }
         //pruebaContenedor.mostrarNombreClientes();
         pruebaContenedor.mostrarDatosClientes();
+
     }
 
 }

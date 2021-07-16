@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Prueba {
@@ -10,27 +11,36 @@ public class Prueba {
     }
 
     public void generarLista() {
-        ArrayList<Integer> listaNumeros = new ArrayList<>();
-        Scanner scan2 = new Scanner(System.in);
-        int numero = 0;
-        while (numero >= 0) {
-            System.out.println("Ingrese un número (Número negativo para salir):");
-            numero = scan2.nextInt();
-            if (numero >= 0) {
-                listaNumeros.add(numero);
+        try {
+            ArrayList<Integer> listaNumeros = new ArrayList<>();
+            Scanner scan2 = new Scanner(System.in);
+            int numero = 0;
+            while (numero >= 0) {
+                System.out.println("Ingrese un número (Número negativo para salir):");
+                numero = scan2.nextInt();
+                if (numero >= 0) {
+                    listaNumeros.add(numero);
+                }
             }
-        }
 
-        // Ciclo for
-        for (int i = 0; i < listaNumeros.size(); i++) {
-            System.out.println(listaNumeros.get(i));
+            // Ciclo for
+            for (int i = 0; i < listaNumeros.size(); i++) {
+                System.out.println(listaNumeros.get(i));
+                // System.out.println(listaNumeros.get(i+1));
+            }
+            System.out.println();
+            // for each
+            listaNumeros.forEach((elemento) -> {
+                System.out.println(elemento);
+            });
+        } catch(InputMismatchException e) { // Excepción de tipo de dato
+            System.out.println("Solo se permiten número");
+        } catch (Exception e2) { // Excepción general
+            System.out.println("Se presentó un error con la lista");
         }
-        System.out.println();
-        // for each
-        listaNumeros.forEach((elemento) -> {
-            System.out.println(elemento);
-        });
-
+        finally {
+            System.out.println("Finalizó el método");
+        }
     }
 
     public void agregarCliente(Cliente pCliente){
