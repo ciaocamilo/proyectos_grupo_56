@@ -65,10 +65,16 @@ public class App {
             nombre = scan.nextLine();
             System.out.println("Ingrese su ID:");
             int id = scan.nextInt();
+
+            /*
             Cliente nuevoCliente = new Cliente();
             nuevoCliente.setCedula(cedula);
             nuevoCliente.setNombre(nombre);
             nuevoCliente.setId(id);
+            */
+
+            Cliente nuevoCliente = new Cliente(cedula, nombre, id);
+
             pruebaContenedor.agregarCliente(nuevoCliente);
             System.out.println("Desea agregar otro cliente? (s / n):");
             opcion = scan.next();
