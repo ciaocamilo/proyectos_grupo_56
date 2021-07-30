@@ -55,6 +55,10 @@ insert into Clientes (identificacion, nombres, apellidos) values ('0997394', 'St
 insert into Clientes (identificacion, nombres, apellidos) values ('9450551', 'June', 'Hellen');
 insert into Clientes (identificacion, nombres, apellidos) values ('4914243', 'Andrea', 'Becconsall');
 
+INSERT INTO Productos (codigoBarras,nombre,precio,talla,color,genero,cantidadDisponible,idMarca) VALUES
+	 ('1111','pantalon',12000.0,'S','Azul','Masculino',10,3),
+	 ('2222','pantalon',15000.0,'M','Negro','Femenino',6,2),
+	 ('3333','camisa',30000.0,'S','Blanco','Masculino',9,1);
 
 /*ALIAS*/
 SELECT identificacion AS "Cédula", nombres AS "Nombre de la persona" FROM Clientes;
@@ -81,3 +85,22 @@ SELECT * FROM Clientes ORDER BY apellidos ASC;
 SELECT COUNT(*) FROM Clientes;
 SELECT COUNT(*) AS "NUMERO DE CLIENTES" FROM Clientes;
 SELECT COUNT(*) AS "NUMERO DE ANDREAS" FROM Clientes WHERE nombres LIKE "%Andrea%";
+
+/*Máximo y mínimo*/
+SELECT MAX(precio) FROM Productos;
+SELECT codigoBarras, nombre, MAX(precio) AS "Precio" FROM Productos;
+SELECT codigoBarras, nombre, MIN(precio) AS "Precio" FROM Productos;
+
+/*Suma*/
+SELECT SUM(cantidadDisponible) AS "Cantidad disponible" FROM Productos;
+/*Suma*/
+SELECT SUM(cantidadDisponible) AS "Cantidad disponible" FROM Productos
+WHERE nombre = 'pantalon';
+
+/*Suma y conteo con Where*/
+SELECT idCliente, COUNT(*) AS "Cantidad ventas", SUM(total) AS "Dinero gastado" FROM Ventas WHERE idCliente = "14832939"
+
+/*JOIN - Unión entre dos tablas*/
+SELECT c.nombres || " " || c.apellidos AS "Nombre cliente", idCliente, COUNT(*) AS "Cantidad ventas", SUM(total) AS "Dinero gastado"
+FROM Ventas v JOIN Clientes c ON v.idCliente = c.identificacion
+WHERE idCliente = "14832939"
