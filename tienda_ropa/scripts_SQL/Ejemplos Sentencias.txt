@@ -104,3 +104,101 @@ SELECT idCliente, COUNT(*) AS "Cantidad ventas", SUM(total) AS "Dinero gastado" 
 SELECT c.nombres || " " || c.apellidos AS "Nombre cliente", idCliente, COUNT(*) AS "Cantidad ventas", SUM(total) AS "Dinero gastado"
 FROM Ventas v JOIN Clientes c ON v.idCliente = c.identificacion
 WHERE idCliente = "14832939"
+
+/*GROUP BY*/
+SELECT genero, COUNT(genero) AS cantidad FROM Productos GROUP BY genero;
+SELECT talla, COUNT(talla) AS cantidad FROM Productos GROUP BY talla;
+
+SELECT color, COUNT(color) AS cantidad FROM Productos GROUP BY color ORDER BY cantidad;
+
+SELECT talla, SUM(cantidadDisponible) AS "Cantidad en inventario" FROM Productos GROUP BY talla;
+
+/*GROUP BY - HAVING*/
+SELECT nombre, AVG(precio) AS "Precio promedio"
+FROM Productos
+GROUP BY nombre
+HAVING "Precio promedio" < 40000;
+
+SELECT nombre, AVG(precio) AS "Precio promedio"
+FROM Productos
+GROUP BY nombre
+HAVING "Precio promedio" < 40000
+ORDER BY "Precio promedio";
+
+SELECT nombre, genero, talla, COUNT(*) AS "Cantidad", AVG(precio) AS "Precio promedio", SUM(cantidadDisponible) AS "Cantidad en inventario"
+FROM Productos
+GROUP BY nombre, genero, talla;
+
+SELECT nombre, genero, talla, COUNT(*) AS "Cantidad", AVG(precio) AS "Precio promedio", SUM(cantidadDisponible) AS "Cantidad en inventario"
+FROM Productos
+GROUP BY nombre, genero, talla
+HAVING nombre = "Jean";
+
+SELECT nombre, genero, talla, COUNT(*) AS "Cantidad", AVG(precio) AS "Precio promedio", SUM(cantidadDisponible) AS "Cantidad en inventario"
+FROM Productos
+GROUP BY nombre, genero, talla
+HAVING nombre = "Jean" AND "Cantidad en inventario" > 9;
+
+/*LEFT JOIN*/
+SELECT c.nombres || " " || c.apellidos AS "Nombre cliente", c.identificacion, v.codigoVenta
+FROM Clientes c LEFT JOIN Ventas v ON v.idCliente = c.identificacion;
+
+/*LEFT JOIN PARA CLIENTES QUE NUNCA HAN COMPRADO*/
+SELECT c.nombres || " " || c.apellidos AS "Nombre cliente", c.identificacion, v.codigoVenta
+FROM Clientes c LEFT JOIN Ventas v ON v.idCliente = c.identificacion
+WHERE v.codigoVenta  IS NULL;
+
+/*productos con precio mayor a la camisa de color blanco*/
+
+/*Subconsulta*/
+SELECT precio FROM Productos
+WHERE nombre = 'Camisa' AND color = 'Blanco';
+
+/*Consulta completa*/
+SELECT codigoBarras, nombre, precio
+FROM Productos
+WHERE precio > (
+				SELECT precio FROM Productos
+				WHERE nombre = 'Camisa' AND color = 'Blanco'
+);
+
+
+
+/*Subconsulta + group by*/
+SELECT nombre, AVG(precio) AS "Precio promedio"
+FROM Productos
+WHERE precio > (
+				SELECT precio FROM Productos
+				WHERE nombre = 'Camisa' AND color = 'Blanco'
+)
+GROUP BY nombre;
+
+SELECT AVG(precio) FROM Productos;
+
+/*Promedio del precio por producto por encima por encima del promedio general*/
+SELECT nombre, AVG(precio) AS "Precio promedio" FROM Productos GROUP BY nombre
+HAVING "Precio promedio" > (
+						SELECT AVG(precio) FROM Productos
+);
+
+
+/*
+Tara
+Tyson
+Qué productos ha comprado
+*/
+/*JOIN MULTIPLE*/
+SELECT c.nombres, c.apellidos, p.nombre, p.precio
+FROM Clientes c JOIN Ventas v ON c.identificacion = v.idCliente
+JOIN VentasProductos vp ON v.codigoVenta = vp.idVenta
+JOIN Productos p ON vp.idProducto = p.codigoBarras
+WHERE nombres = "Tara" AND apellidos = "Tyson";
+
+/*UPDATE*/
+UPDATE Productos
+SET precio  = 35000
+WHERE codigoBarras = "4535";
+
+/*DELETE*/
+DELETE FROM Clientes
+WHERE identificacion = "101010";
