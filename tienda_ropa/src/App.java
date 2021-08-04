@@ -1,13 +1,28 @@
+import modelo.*;
+
+import java.sql.ResultSet;
+
+import conexion.SqliteConnection;
+
 public class App {
     public static void main(String[] args) throws Exception {
         System.out.println("MI TIENDA DE ROPA");
 
-        Producto productoUno = new Producto();
+        SqliteConnection conexionBD = new SqliteConnection();
+        ResultSet resultado = conexionBD.ejecutarConsulta("SELECT * FROM Productos");
 
-        productoUno.setNombre("Camisa");
-        productoUno.setPrecio(65000.0);
+        while (resultado.next()) {
+            String codiBarras = resultado.getString("codigoBarras");
+            String nombre = resultado.getString("nombre");
+            float precio = resultado.getFloat("precio");
 
-        productoUno.mostrar();
+            System.out.println(codiBarras + " " + nombre + " $" + precio);
+        }
+
+        // Producto productoUno = new Producto();
+        // productoUno.setNombre("Camisa");
+        // productoUno.setPrecio(65000.0);
+        // productoUno.mostrar();
 
     }
 }
