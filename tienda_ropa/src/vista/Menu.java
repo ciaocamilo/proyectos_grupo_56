@@ -27,7 +27,9 @@ public class Menu {
                     String clientes = cli1.mostrarClientes(conexionBD);
                     JOptionPane.showMessageDialog(null, clientes, "Listado de clientes", JOptionPane.INFORMATION_MESSAGE);
             case "3":
-
+                    String identCliente = JOptionPane.showInputDialog(null, "Ingrese la identificación del cliente a buscar:", "LA TIENDA DE ROPA", JOptionPane.QUESTION_MESSAGE);
+                    String productos = cli1.listarProductosPorCliente(identCliente, conexionBD);
+                    JOptionPane.showMessageDialog(null, productos, "Listado de productos comprados por cliente", JOptionPane.INFORMATION_MESSAGE);
         }
 
     }
