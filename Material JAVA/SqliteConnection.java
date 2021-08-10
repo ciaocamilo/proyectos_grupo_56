@@ -1,5 +1,8 @@
+package conexion;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -26,13 +29,23 @@ public class SqliteConnection {
     public ResultSet ejecutarConsulta(String consulta) {
         ResultSet rs = null;
         try {
-        Statement stmt = conn.createStatement();
-        rs = stmt.executeQuery(consulta);
-
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(consulta);
         } catch (SQLException e) {
             System.err.println(e);
         }
         return rs;
+    }
+
+    public int ejecutarSentencia(String sentencia) {
+        int nFilas = 0;
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sentencia);
+            nFilas = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+        return nFilas;
     }
 
 }
